@@ -1,0 +1,24 @@
+/*body {
+	background-image: url("../images/background.png")
+}
+*/
+
+.page-header {
+	background-color: red;
+	text-align: center;
+}
+
+.row {
+	text-align: center;
+}
+
+.box {
+	border-style: solid;
+	height: 200px
+
+}
+
+.display {
+	/*border-style: solid;*/
+	height: 100px;
+}
