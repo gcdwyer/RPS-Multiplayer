@@ -14,11 +14,14 @@
 
 .box {
 	border-style: solid;
-	height: 200px
-
+	height: 250px
 }
 
 .display {
 	/*border-style: solid;*/
 	height: 100px;
+}
+
+#player1Stats, #player2Stats {
+	background-color: green;
 }

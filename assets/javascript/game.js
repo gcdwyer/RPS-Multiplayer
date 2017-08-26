@@ -1,52 +1,114 @@
-$(document).ready(function() {
-
-
-
 
 // Initialize Firebase
-	var config = {
-		apiKey: "AIzaSyBPmYZHjpEDxOy9RHvlM4dvDED_iWwRbSY",
-		authDomain: "rps-multiplayer-10a10.firebaseapp.com",
-		databaseURL: "https://rps-multiplayer-10a10.firebaseio.com",
-		projectId: "rps-multiplayer-10a10",
-		storageBucket: "rps-multiplayer-10a10.appspot.com",
-		messagingSenderId: "125264776474"
-	};
-		firebase.initializeApp(config);
+var config = {
+	apiKey: "AIzaSyBPmYZHjpEDxOy9RHvlM4dvDED_iWwRbSY",
+	authDomain: "rps-multiplayer-10a10.firebaseapp.com",
+	databaseURL: "https://rps-multiplayer-10a10.firebaseio.com",
+	projectId: "rps-multiplayer-10a10",
+	storageBucket: "rps-multiplayer-10a10.appspot.com",
+	messagingSenderId: "125264776474"
+};
 
-	function p1StartButton () {
+firebase.initializeApp(config);
 
-		$("#addButton").on("click", function() {
+var database = firebase.database();
 
-			if ($("#nameInput").val() === "") {
+var player1 = null;
+var player2 = null;
 
-				alert("Please enter name");
+var playerName = "";
 
-			} else {
+// Adding players ===================================================================
 
-				console.log("you clicked the start button");
+$("#addButton").on("click", function(event) {
 
-				var p1Name = $("#nameInput").val();
+	event.preventDefault();
 
-				console.log("P1 Name: " + p1Name);
+	if ($("#nameInput").val() === "") {
 
-				$(".box1").html(p1Name);
+		alert("Please enter name");
 
-				$(".display").html("Welcome " + p1Name + "! You are Player 1");
+	} else if (player1 === null) {
 
-				$("#nameInput").val("");
+		console.log("About to add P1");
 
-				$("#nameInput").hide();
+		playerName = $("#nameInput").val().trim();
 
-				$("#addButton").hide();
+		player1 = {
+			name: playerName,
+			win: 0,
+			loss: 0,
+			tie: 0
+		};
 
-			}
-		})
+		database.ref().child("/players/player1").set(player1);
+
+
+
+	} else if (player1 !== null && player2 === null) {
+
+		console.log("About to add P2");
+
+		playerName = $("#nameInput").val().trim();
+
+		player2 = {
+			name: playerName,
+			win: 0,
+			loss: 0,
+			tie: 0
+		};
+
+		database.ref().child("/players/player2").set(player2);
 	}
 
-	p1StartButton();
+	$("#nameInput").val("");
+
+})
+
+
+database.ref("/players/").on("value", function (snapshot) {
+
+	if (snapshot.child("player1").exists()) {
+
+		console.log("P1 exists");
+
+		console.log("palyer1 name: " + player1.name);
+
+		$("#playerPanel1").html(player1.name);
+
+		$("#player1Stats").html("Win: " + player1.win + " | Loss: " + player1.loss + " | Tie: " + player1.tie);
+
+	} else {
+
+		console.log("P1 does NOT exist");
+	}
+
+
+	if (snapshot.child("player2").exists()) {
+
+		console.log("P2 exists");
+
+		console.log("palyer2 name: " + player2.name);
+
+		$("#playerPanel2").html(player2.name);
+
+		$("#player2Stats").html("Win: " + player2.win + " | Loss: " + player2.loss + " | Tie: " + player2.tie);
+
+	} else {
+
+		console.log("P2 does NOT exist");
+	}
+
+
+
+
+
+
+// console.log("snapshot: " + snapshot.val());
 
 });
+
+
 
 // Only 2 users can play at same time
 // P1 enter name

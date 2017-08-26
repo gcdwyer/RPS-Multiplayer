@@ -3,10 +3,19 @@
 <head>
 	<meta charset="UTF-8">
 	<title>RPS-Multiplayer</title>
+
+	<!-- jQuery -->
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
 	<!-- Bootstrap -->
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+
 	<!-- CSS -->
 	<link rel="stylesheet" type="text/css" href="assets/css/style.css">
+
+	<!-- Firebase CDN -->
+	<script src="https://www.gstatic.com/firebasejs/4.3.0/firebase.js"></script>
+
 </head>
 <body>
 
@@ -29,41 +38,65 @@
 		</div>
 
 		<div class="row">
-			<div class="col-md-4 box">
-				<div class="box1">
-					Waiting for Player 1
+			<div class="col-lg-4 col-md-4 col-sm-4 box">
+
+				<div class="panel-body playerPanel" id="playerPanel1">
+					<div class="option"><strong>Waiting on Player 1</strong></div>
 				</div>
+
+				<div class="panel-body panelOption">
+		            <div class="option">Rock</div>
+		        </div>
+
+		        <div class="panel-body panelOption">
+		            <div class="option">Paper</div>
+		        </div>
+
+		        <div class="panel-body panelOption">
+		            <div class="option">Scissors</div>
+		        </div>
+
+				<div class="panel-body panelStats">
+		            <div class="stats" id="player1Stats"></div>
+		        </div>
+
 			</div>
-			<div class="col-md-4 box">
-				<div class="box2">
-					
+
+			<div class="col-lg-4 col-md-4 col-sm-4 box">
+
+				<div class="panel-body Status" id="Status">
+
 				</div>
+
 			</div>
-			<div class="col-md-4 box">
-				<div class="box3">
-					Waiting for Player 2
+
+			<div class="col-lg-4 col-md-4 col-sm-4 box">
+
+				<div class="panel-body playerPane2" id="playerPanel2">
+					<div class="option"><strong>Waiting on Player 2</strong></div>
 				</div>
+
+				<div class="panel-body panelOption">
+		            <div class="option">Rock</div>
+		        </div>
+
+		        <div class="panel-body panelOption">
+		            <div class="option">Paper</div>
+		        </div>
+
+		        <div class="panel-body panelOption">
+		            <div class="option">Scissors</div>
+		        </div>
+
+				<div class="panel-body panelStats">
+		            <div class="stats" id="player2Stats"></div>
+		        </div>
+
 			</div>
 		</div>
-
 	</div>
 
 
-
-
-
-
-	
-	<!-- jQuery -->
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-	<!-- Firebase CDN -->
-	<script src="https://www.gstatic.com/firebasejs/4.3.0/firebase.js"></script>
-	<!-- Firebase App -->
-	<script src="https://www.gstatic.com/firebasejs/4.3.0/firebase-app.js"></script>
-	<!-- Realtime DB -->
-	<script src="https://www.gstatic.com/firebasejs/4.3.0/firebase-database.js"></script>
-	<!-- Cloudbased messaging -->
-	<script src="https://www.gstatic.com/firebasejs/4.3.0/firebase-messaging.js"></script>
 	<!-- My JS needs to be last -->
 	<script src="assets/javascript/game.js"></script>
 </body>
