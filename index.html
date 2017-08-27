@@ -29,7 +29,7 @@
 		<div class="row">
 			<div class="col-md-12">
 				<div class="display">
-					<div class="nameStart">
+					<div id="nameStart">
 						<input type="text" id="nameInput">
 						<input type="submit" id="addButton" value="Start">
 					</div>
@@ -40,25 +40,29 @@
 		<div class="row">
 			<div class="col-lg-4 col-md-4 col-sm-4 box">
 
-				<div class="panel-body playerPanel" id="playerPanel1">
-					<div class="option"><strong>Waiting on Player 1</strong></div>
+				<div id="player1Panel">
+
+					<div class="panel-body playerPanel" id="playerPanel1">
+						<div class="option"></div>
+					</div>
+
+					<div class="panel-body panelOption">
+			            <div class="option">Rock</div>
+			        </div>
+
+			        <div class="panel-body panelOption">
+			            <div class="option">Paper</div>
+			        </div>
+
+			        <div class="panel-body panelOption">
+			            <div class="option">Scissors</div>
+			        </div>
+
+					<div class="panel-body panelStats">
+			            <div class="stats" id="player1Stats"></div>
+			        </div>
+
 				</div>
-
-				<div class="panel-body panelOption">
-		            <div class="option">Rock</div>
-		        </div>
-
-		        <div class="panel-body panelOption">
-		            <div class="option">Paper</div>
-		        </div>
-
-		        <div class="panel-body panelOption">
-		            <div class="option">Scissors</div>
-		        </div>
-
-				<div class="panel-body panelStats">
-		            <div class="stats" id="player1Stats"></div>
-		        </div>
 
 			</div>
 
@@ -72,26 +76,28 @@
 
 			<div class="col-lg-4 col-md-4 col-sm-4 box">
 
-				<div class="panel-body playerPane2" id="playerPanel2">
-					<div class="option"><strong>Waiting on Player 2</strong></div>
-				</div>
+				<div id="player1Pane2">
 
-				<div class="panel-body panelOption">
-		            <div class="option">Rock</div>
-		        </div>
+					<div class="panel-body playerPane2" id="playerPanel2">
+						<div class="option"></div>
+					</div>
 
-		        <div class="panel-body panelOption">
-		            <div class="option">Paper</div>
-		        </div>
+					<div class="panel-body panelOption">
+			            <div class="option">Rock</div>
+			        </div>
 
-		        <div class="panel-body panelOption">
-		            <div class="option">Scissors</div>
-		        </div>
+			        <div class="panel-body panelOption">
+			            <div class="option">Paper</div>
+			        </div>
 
-				<div class="panel-body panelStats">
-		            <div class="stats" id="player2Stats"></div>
-		        </div>
+			        <div class="panel-body panelOption">
+			            <div class="option">Scissors</div>
+			        </div>
 
+					<div class="panel-body panelStats">
+			            <div class="stats" id="player2Stats">Wins: 0 | Loss: 0 | Tie: 0</div>
+			        </div>
+			    </div>
 			</div>
 		</div>
 	</div>
