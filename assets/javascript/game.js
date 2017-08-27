@@ -183,10 +183,71 @@ function compare() {
 
 		if (p2choice === "Rock") {
 
-			console.log("Tie");
+			console.log("Tie Game");
+			database.ref("/players/player1/tie").set(player1.tie + 1)
+			database.ref("/players/player2/tie").set(player2.tie + 1)
+
+		} else if (p2choice === "Paper") {
+
+			console.log("Paper Wins");
+			database.ref("/players/player1/loss").set(player1.loss + 1)
+			database.ref("/players/player2/win").set(player2.win + 1)
+
+		} else { //Scissors
+
+			console.log("Rock Wins");
+			database.ref("/players/player1/win").set(player1.win + 1)
+			database.ref("/players/player2/loss").set(player2.loss + 1)
 
 		}
 
+	} 
+
+	else if (p1choice === "Paper") {
+
+		if (p2choice === "Rock") {
+
+			console.log("Paper Wins");
+			database.ref("/players/player1/win").set(player1.win + 1)
+			database.ref("/players/player2/loss").set(player2.loss + 1)
+
+		} else if (p2choice === "Paper") {
+
+			console.log("Tie Game");
+			database.ref("/players/player1/tie").set(player1.tie + 1)
+			database.ref("/players/player2/tie").set(player2.tie + 1)
+
+		} else { //Scissors
+
+			console.log("Scissors Win");
+			database.ref("/players/player1/loss").set(player1.loss + 1)
+			database.ref("/players/player2/win").set(player2.win + 1)
+
+		}
+
+	} 
+
+	else if (p1choice === "Scissors") {
+
+		if (p2choice === "Rock") {
+
+			console.log("Rock Wins");
+			database.ref("/players/player1/loss").set(player1.loss + 1)
+			database.ref("/players/player2/win").set(player2.win + 1)
+
+		} else if (p2choice === "Paper") {
+
+			console.log("Scissors Win");
+			database.ref("/players/player1/win").set(player1.win + 1)
+			database.ref("/players/player2/loss").set(player2.loss + 1)
+
+		} else { //Scissors
+
+			console.log("Tie Game");
+			database.ref("/players/player1/tie").set(player1.tie + 1)
+			database.ref("/players/player2/tie").set(player2.tie + 1)
+
+		}
 
 	}
 
