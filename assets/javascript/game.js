@@ -68,8 +68,35 @@ $("#addButton").on("click", function(event) {
 		$("#nameStart").hide();
 	}
 
+	console.log("playerName: " + playerName);
+
+	// add player to message when joining
+	var message = playerName + " has joined the chat!";
+
+	console.log("joined: " + message);
+
+	$("#chatDisplay").append(message + "<br>");
+
 	// clears the name field
 	$("#nameInput").val("");
+
+})
+
+// Chat =========================================================================
+
+$("#chatSend").on("click", function(event) {
+
+	event.preventDefault();
+
+	console.log("Send chat button pressed");
+
+	var message = $("#textField").val().trim();
+
+	console.log("message: " + message);
+
+	$("#textField").val("");
+
+
 
 })
 
@@ -131,7 +158,7 @@ database.ref("/players/").on("value", function (snapshot) {
 
 		// $("#Status").text("Waiting on " + player1Name + " to choose...");
 
-		$("#Status").text("Waiting on selections...");
+		$("#Status").text("Waiting on " + player1.name + " to make a selection");
 
 	}
 
@@ -140,13 +167,25 @@ database.ref("/players/").on("value", function (snapshot) {
 
 // Mouse over to change display =============================================================
 
-	$("#player1Panel").on("mouseover", ".panel1Option", function () {
+	$(".panel1Option").on("mouseover", function () {
 
 	 		$(this).css("background-color", "lightgray");
 
 	 	})
 
-	$("#player1Panel").on("mouseout", ".panel1Option", function () {
+	$(".panel1Option").on("mouseout", function () {
+
+	 		$(this).css("background-color", "white");
+
+	 	})
+
+	$(".panel2Option").on("mouseover", function () {
+
+	 		$(this).css("background-color", "lightgray");
+
+	 	})
+
+	$(".panel2Option").on("mouseout", function () {
 
 	 		$(this).css("background-color", "white");
 
@@ -178,6 +217,8 @@ $("#player1Panel").on("click", ".panel1Option", function() {
 		database.ref().child("/players/turn").set(turn);
 
 		console.log("Player " + turn + " turn");
+
+		$("#Status").text("Waiting on " + player2.name + " to make a selection");
 
 	}
 

@@ -27,6 +27,25 @@
 
 }
 
-/*#player1Stats, #player2Stats {
+#chatDisplay {
+	height: 150px;
+	width: 100%;
+	overflow: auto;
+	text-align: left;
 	background-color: green;
-}*/
+}
+
+#textField {
+	width: 91%;
+	float: left;
+	margin-left: -5px;
+}
+
+#sendChat {
+	background-color: red;
+}
+
+.btn-default {
+	float: right;
+
+}
