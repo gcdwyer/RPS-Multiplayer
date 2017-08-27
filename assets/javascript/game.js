@@ -68,17 +68,18 @@ $("#addButton").on("click", function(event) {
 		$("#nameStart").hide();
 	}
 
+	// clears the name field
+	$("#nameInput").val("");
+
+
+	// Chat Join Game ========================================================
+
 	console.log("playerName: " + playerName);
 
 	// add player to message when joining
-	var message = playerName + " has joined the chat!";
+	var joined = playerName + " has joined the chat!";
 
-	console.log("joined: " + message);
-
-	$("#chatDisplay").append(message + "<br>");
-
-	// clears the name field
-	$("#nameInput").val("");
+	$("#chatDisplay").append(joined + "<br>");
 
 })
 
@@ -88,11 +89,13 @@ $("#chatSend").on("click", function(event) {
 
 	event.preventDefault();
 
-	console.log("Send chat button pressed");
-
 	var message = $("#textField").val().trim();
 
 	console.log("message: " + message);
+
+	console.log("playerName: " + playerName);
+
+	$("#chatDisplay").append(playerName + ": " + message + "<br>");
 
 	$("#textField").val("");
 

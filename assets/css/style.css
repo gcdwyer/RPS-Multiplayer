@@ -1,11 +1,12 @@
-/*body {
+body {
 	background-image: url("../images/background.png")
 }
-*/
+
 
 .page-header {
-	background-color: red;
+	/*background-color: red;*/
 	text-align: center;
+	color: white;
 }
 
 .row {
@@ -14,7 +15,10 @@
 
 .box {
 	border-style: solid;
-	height: 250px
+	border-width: 1px;
+	height: 250px;
+	background-color: white;
+	/*color: white;*/
 }
 
 .display {
@@ -32,20 +36,29 @@
 	width: 100%;
 	overflow: auto;
 	text-align: left;
-	background-color: green;
+	border-style: solid;
+	border-color: black;
+	border-width: 1px;
 }
 
 #textField {
-	width: 91%;
+	width: 80%;
 	float: left;
 	margin-left: -5px;
+	border-color: black;
 }
 
 #sendChat {
 	background-color: red;
+	border-color: black;
 }
 
 .btn-default {
 	float: right;
+	border-color: black;
 
+}
+
+#chatDisplay {
+	background-color: white;
 }
