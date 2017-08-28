@@ -2,9 +2,7 @@ body {
 	background-image: url("../images/background.png")
 }
 
-
 .page-header {
-	/*background-color: red;*/
 	text-align: center;
 	color: white;
 }
@@ -18,17 +16,14 @@ body {
 	border-width: 1px;
 	height: 250px;
 	background-color: white;
-	/*color: white;*/
 }
 
 .display {
-	/*border-style: solid;*/
 	height: 100px;
 }
 
 .test {
 	vertical-align: middle;
-
 }
 
 #chatDisplay {
@@ -56,9 +51,16 @@ body {
 .btn-default {
 	float: right;
 	border-color: black;
-
 }
 
 #chatDisplay {
 	background-color: white;
+}
+
+#addButton {
+	float: none;
+}
+
+.messengerTitle{
+	color: white;
 }

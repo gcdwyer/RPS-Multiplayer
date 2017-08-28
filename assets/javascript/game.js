@@ -40,7 +40,7 @@ $("#addButton").on("click", function(event) {
 			loss: 0,
 			tie: 0
 		};
-		database.ref().child("/players/player1").set(player1);
+		database.ref("/players/player1").set(player1);
 		database.ref("/players/turn").set(turn);
 
 	// if player 1 exists, but player 2 doesn't, create it
@@ -54,7 +54,7 @@ $("#addButton").on("click", function(event) {
 			loss: 0,
 			tie: 0
 		};
-		database.ref().child("/players/player2").set(player2);
+		database.ref("/players/player2").set(player2);
 		$("#nameStart").hide();
 	}
 
@@ -79,8 +79,6 @@ $("#chatSend").on("click", function(event) {
 // Event Listener for Players in DB ====== ========================================================
 
 database.ref("/players/").on("value", function (snapshot) {
-
-	console.log(snapshot.val());
 
 	if (snapshot.child("player1").exists()) {
 		console.log("P1 exists");
@@ -108,9 +106,17 @@ database.ref("/players/").on("value", function (snapshot) {
 		console.log("P2 does NOT exist");
 	}
 
-	if (player1 !== null && player2 !== null) {
+	if (player1 !== null && player2 !== null && turn === 1) {
+
 		$("#Status").text("Waiting on " + player1.name + " to make a selection");
+
+	} else if (player1 !== null && player2 !== null && turn === 2) {
+
+		$("#Status").text("Waiting on " + player2.name + " to make a selection");
+
 	}
+
+
 });
 
 // Event listener for Chat in DB ====== ========================================================
@@ -142,16 +148,19 @@ database.ref("/chat/").on("child_added", function(snapshot) {
 
 // Event Handler - Player 1 pick =============================================================
 
-$("#player1Panel").on("click", ".panel1Option", function() {
+$(".panel1Option").on("click", function() {
 
 	// event.preventDefault();
+	console.log("event handler P1 pick");
+
 
 	if (player1 !== null && player2 !== null && turn === 1) {
 		var choice = $(this).text().trim();
 		console.log("p1 choice: " + choice);
 		database.ref("/players/player1/choice").set(choice);
-		$(".panel1Option").hide();
+		$(".panel1Option").hide(); // replaceWith?
 		$("#playerPanel1").append("<br><br><br><h1>" + choice + "</h1><br><br>");
+
 		turn = 2;
 		database.ref().child("/players/turn").set(turn);
 		console.log("Player " + turn + " turn");
@@ -161,9 +170,10 @@ $("#player1Panel").on("click", ".panel1Option", function() {
 
 // Event Handler - Player 2 pick ============================================================
 
-$("#player1Pane2").on("click", ".panel2Option", function() {
+$(".panel2Option").on("click", function() {
 
 	// event.preventDefault();
+	console.log("event handler P2 pick");
 
 	if (player1 !== null && player2 !== null && turn === 2) {
 		var choice = $(this).text().trim();
@@ -171,6 +181,10 @@ $("#player1Pane2").on("click", ".panel2Option", function() {
 		database.ref("/players/player2/choice").set(choice);
 		$(".panel2Option").hide();
 		$("#playerPanel2").html("<br><br><br><h1>" + choice + "</h1><br><br>");
+
+		turn = 1;
+		database.ref().child("/players/turn").set(turn);
+		console.log("Player " + turn + " turn");
 
 		compare();
 	}
@@ -269,7 +283,5 @@ function compare() {
 		$("#Status").hide();
 	}
 
-	turn = 1;
 
-	console.log("Player " + turn + " turn");
 }
