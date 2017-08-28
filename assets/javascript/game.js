@@ -1,5 +1,5 @@
+// Variables ==============================================================================
 
-// Initialize Firebase
 var config = {
 	apiKey: "AIzaSyBPmYZHjpEDxOy9RHvlM4dvDED_iWwRbSY",
 	authDomain: "rps-multiplayer-10a10.firebaseapp.com",
@@ -23,63 +23,56 @@ var playerName = "";
 
 var turn = 1;
 
-// Adding players =============================================================================
+// CLICK EVENT ===========================================================================
 
 $("#addButton").on("click", function(event) {
 
 	event.preventDefault();
 
+	// if no name is in name field, alert user
 	if ($("#nameInput").val() === "") {
-
 		alert("Please enter name");
 
+	// if player 1 doesn't exist, create it
 	} else if (player1 === null) {
-
 		console.log("About to add P1");
-
 		playerName = $("#nameInput").val().trim();
-
 		player1 = {
 			name: playerName,
 			win: 0,
 			loss: 0,
 			tie: 0
 		};
-
 		database.ref().child("/players/player1").set(player1);
-
 		database.ref("/players/turn").set(turn);
 
+	// if player 1 exists, but player 2 doesn't, create it
 	} else if (player1 !== null && player2 === null) {
 
 		console.log("About to add P2");
-
 		playerName = $("#nameInput").val().trim();
-
 		player2 = {
 			name: playerName,
 			win: 0,
 			loss: 0,
 			tie: 0
 		};
-
 		database.ref().child("/players/player2").set(player2);
-
 		$("#nameStart").hide();
 	}
 
 	// clears the name field
 	$("#nameInput").val("");
 
-
 	// Chat Join Game ========================================================
-
 	console.log("playerName: " + playerName);
 
 	// add player to message when joining
 	var joined = playerName + " has joined the chat!";
 
-	$("#chatDisplay").append(joined + "<br>");
+	database.ref("/chat/").push(joined);
+
+	// $("#chatDisplay").append(joined + "<br>");
 
 })
 
@@ -89,17 +82,18 @@ $("#chatSend").on("click", function(event) {
 
 	event.preventDefault();
 
-	var message = $("#textField").val().trim();
+	var msg = $("#textField").val().trim();
+
+	var message = playerName + ": " + msg;
 
 	console.log("message: " + message);
 
 	console.log("playerName: " + playerName);
 
-	$("#chatDisplay").append(playerName + ": " + message + "<br>");
+	database.ref("/chat/").push(message);
+	// $("#chatDisplay").append(playerName + ": " + message + "<br>");
 
 	$("#textField").val("");
-
-
 
 })
 
@@ -113,8 +107,6 @@ database.ref("/players/").on("value", function (snapshot) {
 
 		console.log("P1 exists");
 
-		// console.log("palyer1 name: " + player1.name);
-
 		player1 = snapshot.val().player1;
 
 		player1Name = player1.name;
@@ -124,11 +116,8 @@ database.ref("/players/").on("value", function (snapshot) {
 		$("#player1Stats").html("Win: " + player1.win + " | Loss: " + player1.loss + " | Tie: " + player1.tie);
 
 	} else {
-
 		$("#playerPanel1").text("Waiting on Player 1...");
-
 		$("#player1Stats").text("Wins: 0 | Loss: 0 | Tie: 0");
-
 		console.log("P1 does NOT exist");
 	}
 
@@ -136,8 +125,6 @@ database.ref("/players/").on("value", function (snapshot) {
 	if (snapshot.child("player2").exists()) {
 
 		console.log("P2 exists");
-
-		// console.log("palyer2 name: " + player2.name);
 
 		player2 = snapshot.val().player2;
 
@@ -148,11 +135,8 @@ database.ref("/players/").on("value", function (snapshot) {
 		$("#player2Stats").html("Win: " + player2.win + " | Loss: " + player2.loss + " | Tie: " + player2.tie);
 
 	} else {
-		
 		$("#playerPanel2").text("Waiting on Player 2...");
-
 		$("#player2Stats").text("Wins: 0 | Loss: 0 | Tie: 0");
-
 		console.log("P2 does NOT exist");
 	}
 
@@ -165,6 +149,16 @@ database.ref("/players/").on("value", function (snapshot) {
 
 	}
 
+});
+
+// Listener on CHAT for any changes
+database.ref("/chat/").on("child_added", function(snapshot) {
+
+	var messages = snapshot.val();
+
+	console.log(messages);
+
+	$("#chatDisplay").append(messages + "<br>");
 
 });
 
